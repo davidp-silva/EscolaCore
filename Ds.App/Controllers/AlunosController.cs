@@ -11,6 +11,8 @@ using Ds.Business.Interfaces;
 using AutoMapper;
 using Ds.Business.Models;
 using Ds.Business.Services;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Ds.App.Controllers
 {
@@ -59,7 +61,7 @@ namespace Ds.App.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NomeCompleto,Documento,Ativo,DataNascimento,Telefone")] AlunoViewModel alunoViewModel)
+        public async Task<IActionResult> Create(AlunoViewModel alunoViewModel)
         {
             if (!ModelState.IsValid) return View(alunoViewModel);
 
@@ -79,7 +81,7 @@ namespace Ds.App.Controllers
                 return NotFound();
             }
 
-            return View(_mapper.Map<AlunoViewModel>(await _alunoRepository.ObterPorId(id)));
+            return View(_mapper.Map<AlunoViewModel>(await _alunoRepository.ObterAlunoEndereco(id)));
         }
 
         // POST: Alunos/Edit/5
@@ -87,7 +89,7 @@ namespace Ds.App.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,NomeCompleto,Documento,Ativo,DataNascimento,Telefone")] AlunoViewModel alunoViewModel)
+        public async Task<IActionResult> Edit(Guid id,AlunoViewModel alunoViewModel)
         {
             if (id != alunoViewModel.Id) return NotFound();
 
@@ -126,6 +128,59 @@ namespace Ds.App.Controllers
             if (!OperacaoValida()) return View(alunoViewModel);
 
             return RedirectToAction("Index");
+        }
+
+        [AllowAnonymous]
+        [Route("obter-endereco-aluno/{id:guid}")]
+        public async Task<IActionResult> ObterEndereco(Guid id)
+        {
+            var fornecedor = await ObterEnderecoAluno(id);
+
+            if (fornecedor == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_DetalhesEndereco", fornecedor);
+        }
+
+        //[ClaimsAuthorize("Fornecedor", "Editar")]
+        [Route("atualizar-endereco-aluno/{id:guid}")]
+        public async Task<IActionResult> AtualizarEndereco(Guid id)
+        {
+            var aluno = await ObterEnderecoAluno(id);
+
+            if (aluno == null)
+            {
+                return NotFound();
+            }
+
+            return PartialView("_AtualizarEndereco", new AlunoViewModel { Endereco = aluno.Endereco });
+        }
+
+       // [ClaimsAuthorize("Fornecedor", "Editar")]
+        [Route("atualizar-endereco-aluno/{id:guid}")]
+        [HttpPost]
+        public async Task<IActionResult> AtualizarEndereco(AlunoViewModel alunoViewModel)
+        {
+            ModelState.Remove<AlunoViewModel>(c => c.DataNascimento);
+            ModelState.Remove<AlunoViewModel>(c => c.Documento);
+            ModelState.Remove<AlunoViewModel>(c => c.NomeCompleto);
+            ModelState.Remove<AlunoViewModel>(c => c.Telefone);
+
+            if (!ModelState.IsValid) return PartialView("_AtualizarEndereco", alunoViewModel);
+
+            await _alunoService.AtualizarEndereco(_mapper.Map<Endereco>(alunoViewModel.Endereco));
+
+            if (!OperacaoValida()) return PartialView("_AtualizarEndereco", alunoViewModel);
+
+            var url = Url.Action("ObterEndereco", "Alunos", new { id = alunoViewModel.Endereco.PessoaId });
+            return Json(new { success = true, url });
+        }
+
+        private async Task<AlunoViewModel> ObterEnderecoAluno(Guid id)
+        {
+            return _mapper.Map<AlunoViewModel>(await _alunoService.ObterAlunoEndereco(id));
         }
     }
 }

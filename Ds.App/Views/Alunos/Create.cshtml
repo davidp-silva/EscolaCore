@@ -4,7 +4,7 @@
     ViewData["Title"] = "Novo Aluno";
 }
 
-    <h1 style="padding-top: 30px">@ViewData["Title"] </h1>
+<h1 style="padding-top: 30px">@ViewData["Title"] </h1>
 
 <hr />
 <div class="row">
@@ -38,10 +38,16 @@
                 <input asp-for="Telefone" class="form-control" />
                 <span asp-validation-for="Telefone" class="text-danger"></span>
             </div>
+
+            <h4>Endereço</h4>
+            <hr />
+
+            <partial name="_Endereco" />
+
             <div class="form-group">
                 <input type="submit" value="Cadastrar" class="btn btn-primary" />
-                
-                    <a class="btn btn-info" asp-action="Index">Voltar</a>
+
+                <a class="btn btn-info" asp-action="Index">Voltar</a>
             </div>
         </form>
     </div>
@@ -49,4 +55,8 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        BuscaCep();
+    </script>
 }

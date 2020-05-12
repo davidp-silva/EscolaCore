@@ -11,5 +11,7 @@ namespace Ds.Business.Interfaces
         Task Adicionar(Aluno aluno);
         Task Atualizar(Aluno aluno);
         Task Remover(Guid id);
+        Task<Aluno>  ObterAlunoEndereco(Guid id);
+        Task AtualizarEndereco(Endereco endereco);
     }
 }

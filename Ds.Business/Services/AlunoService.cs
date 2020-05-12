@@ -10,16 +10,18 @@ namespace Ds.Business.Services
     public class AlunoService : BaseService, IAlunoService
     {
         private IAlunoRepository _alunoRepository;
+        private IEnderecoRepository _enderecoRepository;
         
-        public AlunoService(INotificador notificador,IAlunoRepository alunoRepository) : base(notificador)
+        public AlunoService(INotificador notificador,IAlunoRepository alunoRepository,IEnderecoRepository enderecoRepository) : base(notificador)
         {
             _alunoRepository = alunoRepository;
+            _enderecoRepository = enderecoRepository;
         }
 
         public async Task Adicionar(Aluno aluno)
         {
 
-            if (!ExecutarValidacao(new AlunoValidation(), aluno)) return;
+            if (!ExecutarValidacao(new AlunoValidation(), aluno) || !ExecutarValidacao(new EnderecoValidation(), aluno.Endereco)) return;
 
             if(_alunoRepository.Buscar(a=>a.Documento==aluno.Documento).Result.Any())
             {
@@ -58,6 +60,19 @@ namespace Ds.Business.Services
         public void Dispose()
         {
             _alunoRepository?.Dispose();
+        }
+
+        public async Task<Aluno> ObterAlunoEndereco(Guid id)
+        {
+            return await _alunoRepository.ObterAlunoEndereco(id);
+        }
+
+
+        public async Task AtualizarEndereco(Endereco endereco)
+        {
+            if (!ExecutarValidacao(new EnderecoValidation(), endereco)) return;
+
+            await _enderecoRepository.Atualizar(endereco);
         }
     }
 }
