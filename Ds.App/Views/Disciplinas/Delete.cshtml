@@ -1,0 +1,27 @@
+﻿@model Ds.App.ViewModels.DisciplinaViewModel
+
+@{
+    ViewData["Title"] = "Exclusão de Disciplina";
+}
+
+
+<h1>@ViewData["Title"]</h1>
+    <vc:summary></vc:summary>
+    <hr />
+    <br />
+    <div>
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.NomeDisciplina)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.NomeDisciplina)
+            </dd>
+        </dl>
+
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Excluir" class="btn btn-danger" />
+            <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+        </form>
+    </div>

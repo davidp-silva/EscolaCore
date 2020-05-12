@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Ds.App.ViewModels.NotaViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Notas";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<br />
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Nova Nota</a>
+</p>
+
+<br />
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorNota)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Disciplina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aluno)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Periodo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorNota)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Disciplina.NomeDisciplina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.NomeCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Periodo.NomePeriodo)
+            </td>
+            <td class="text-right">
+                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
+                <a class="btn btn-warning" supress-by-claim-name="Fornecedor" supress-by-claim-value="Editar" asp-action="Edit" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
+                <a class="btn btn-danger" supress-by-claim-name="Fornecedor" supress-by-claim-value="Excluir" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

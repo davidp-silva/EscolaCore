@@ -1,0 +1,29 @@
+﻿@model Ds.App.ViewModels.PeriodoViewModel
+
+@{
+    ViewData["Title"] = "Novo Período";
+}
+
+<h1 style="padding-top: 30px">@ViewData["Title"] </h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-10">
+        <form asp-action="Create">
+            <vc:summary></vc:summary>
+            <div class="form-group">
+                <label asp-for="NomePeriodo" class="control-label"></label>
+                <input asp-for="NomePeriodo" class="form-control" />
+                <span asp-validation-for="NomePeriodo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                <a class="btn btn-info" asp-action="Index">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ds.Data", "Ds.Data\Ds.Data.csproj", "{54F3885D-1AF1-437F-AE9B-79003E0A7741}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ds.Business", "Ds.Business\Ds.Business.csproj", "{4D63DA3D-D32A-49BF-A4EC-2DDB343A3AF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ds.App", "Ds.App\Ds.App.csproj", "{55314D01-07F4-45D5-93F7-280DBCFC1655}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54F3885D-1AF1-437F-AE9B-79003E0A7741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54F3885D-1AF1-437F-AE9B-79003E0A7741}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54F3885D-1AF1-437F-AE9B-79003E0A7741}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54F3885D-1AF1-437F-AE9B-79003E0A7741}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D63DA3D-D32A-49BF-A4EC-2DDB343A3AF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D63DA3D-D32A-49BF-A4EC-2DDB343A3AF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D63DA3D-D32A-49BF-A4EC-2DDB343A3AF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D63DA3D-D32A-49BF-A4EC-2DDB343A3AF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55314D01-07F4-45D5-93F7-280DBCFC1655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55314D01-07F4-45D5-93F7-280DBCFC1655}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55314D01-07F4-45D5-93F7-280DBCFC1655}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55314D01-07F4-45D5-93F7-280DBCFC1655}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {77543EC6-1FC2-4976-A720-2788ABB31B6F}
+	EndGlobalSection
+EndGlobal

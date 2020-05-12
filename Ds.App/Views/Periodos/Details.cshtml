@@ -1,0 +1,26 @@
+﻿@model Ds.App.ViewModels.PeriodoViewModel
+
+
+@{
+    ViewData["Title"] = "Detalhe do Período - " + Model.NomePeriodo;
+}
+
+<h1 style="padding-top: 50px">@ViewData["Title"]</h1>
+<hr />
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NomePeriodo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NomePeriodo)
+        </dd>
+    </dl>
+</div>
+
+<div>
+    <a class="btn btn-dark" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>
+    <a class="btn btn-info" href="javascript:window.history.back();">Voltar</a>
+</div>
+
